@@ -1,5 +1,3 @@
-# spec/models/notification.rb
-
 require 'rails_helper'
 
 RSpec.describe Notification, type: :model do
@@ -8,5 +6,15 @@ RSpec.describe Notification, type: :model do
       notification = FactoryBot.build_stubbed(:notification)
       expect(notification).to be_valid
     end
+  end
+
+  describe 'validatons' do
+  	it 'can be created if vaild' do
+	  	notification = FactoryBot.build_stubbed(:notification)
+	  	notification.phone = nil
+	  	notification.body = nil
+	  	notification.source_app = nil
+	  	expect(notification).to_not be_valid
+	end
   end
 end
