@@ -40,5 +40,23 @@ RSpec.describe Notification, type: :request do
     expect(response).to have_http_status(:unprocessable_entity)
   end
 
+  it 'sends a test message via the Twilio API after a notication is created' do 
+    headers = {
+      "ACCEPT" => "application/json"
+    }
+
+    post "/notifications", 
+    :params => 
+    { :notification => 
+      { 
+        :phone => "1234567890", 
+        :body => "My message", 
+        :source_app => "my_app_name"
+      } 
+    }, :headers => headers
+    
+    expect(FakeSms.message.last.num).to eq("1234567890")
+  end
+
 end
 
