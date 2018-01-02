@@ -17,5 +17,18 @@ RSpec.describe Client, type: :model do
   		@client.api_key = nil
   		expect(@client).to_not be_valid
   	end
+
+     it 'has a unique source_app' do
+      first_client = Client.create(source_app: "app_name", api_key: "I384fHtD1h9XZvs4fGPJUgtt")
+      duplicate_client = Client.create(source_app: "app_name", api_key: "I384fHtD1h9XZvs4fGPJUgtt")
+      expect(duplicate_client).to_not be_valid
+    end
+  end
+
+  describe 'callbacks' do
+    it 'will have an api_key automatically assigned when created' do
+      client = Client.create(source_app: "app_name")
+      expect(client.api_key).to_not be_nil
+    end
   end
 end
