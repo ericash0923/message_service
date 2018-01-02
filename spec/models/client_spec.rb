@@ -17,6 +17,5 @@ RSpec.describe Client, type: :model do
   		@client.api_key = nil
   		expect(@client).to_not be_valid
   	end
-  	
   end
 end
