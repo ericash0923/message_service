@@ -15,6 +15,7 @@ class NotificationsController < ApplicationController
 	end
 
 	def show
+		@notification = Notification.find(params[:id])
 	end
 
 	private
